@@ -1,0 +1,16 @@
+RESENJE - POGLEDI
+------------------------------------------
+CREATE VIEW `PrivredaZanatsvo`.`SviPodacioEvidencijiRealizovaneProizvodnje` AS select `EvidencijaRealizovaneProizvodnje`.`IdProizvodnje`, `EvidencijaRealizovaneProizvodnje`.`NazivProizvodnje`,  `EvidencijaRealizovaneProizvodnje`.`MestoProizvodnje`,  `EvidencijaRealizovaneProizvodnje`.`BrojProizvodnihObjekata`, `Proizvodjac`.`Prezime` as `PrezimeProizvodjaca` from `PrivredaZanatsvo`.`EvidencijaRealizovaneProizvodnje` INNER JOIN `PrivredaZanatsvo`.`Proizvodjac` ON `PrivredaZanatsvo`.`EvidencijaRealizovaneProizvodnje`.`IdProizvodjaca`=`PrivredaZanatsvo`.`Proizvodjac`.`Id`;
+
+RESENJE ZA STORED PROCEDURU- insert into
+-----------------------
+USE `PrivredaZanatsvo`;
+DROP procedure IF EXISTS `DodajEvidenciju`;
+DELIMITER $$
+USE `PrivredaZanatsvo`$$
+CREATE PROCEDURE `DodajEvidenciju` (IN IdProizvodnjeParametar int, IN NazivProizvodnjeParametar varchar(100), IN MestoProizvodnjeParametar varchar(100),  IN BrojProizvodnihObjekataParametar int,  IN IdProizvodjacaParametar int)
+BEGIN
+INSERT INTO `EvidencijaRealizovaneProizvodnje` (`IdProizvodnje`, `NazivProizvodnje`, `MestoProizvodnje`, `BrojProizvodnihObjekata`, `IdProizvodjaca`) VALUES (IdProizvodnjeParametar, NazivProizvodnjeParametar, MestoProizvodnjeParametar, BrojProizvodnihObjekataParametar, IdProizvodjacaParametar);
+END
+$$
+DELIMITER ;

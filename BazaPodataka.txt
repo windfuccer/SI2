@@ -1,0 +1,45 @@
+﻿CREATE DATABASE `PrivredaZanatsvo` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+create table `PrivredaZanatsvo`.`EvidencijaRealizovaneProizvodnje`
+(
+   IdProizvodnje int NOT NULL PRIMARY KEY,
+   NazivProizvodnje varchar(100) not null,
+   MestoProizvodnje varchar(50) not null,
+   BrojProizvodnihObjekata varchar(100) null,
+   IdProizvodjaca int not null
+);
+
+
+create table `PrivredaZanatsvo`.`Proizvodjac`
+(
+   Id int NOT NULL PRIMARY KEY,
+   Prezime varchar(50) not null,
+   Ime varchar(50) not null,
+   MestoPrebivalista varchar(50) not null,
+   UkupanBrojEvidencija int not null
+);
+
+alter table `PrivredaZanatsvo`.`EvidencijaRealizovaneProizvodnje` add constraint FK_IMA foreign key (IdProizvodjaca) references `PrivredaZanatsvo`.`Proizvodjac`(Id) on delete restrict on update cascade;
+
+
+create table `PrivredaZanatsvo`.`KORISNIK`
+(
+   IDKORISNIKA          int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   PREZIME              varchar(50) not null,
+   IME                  varchar(40) not null,
+   EMAIL                varchar(60) not null,
+   KORISNICKOIME        varchar(30) not null,
+   SIFRA                varchar(30) not null,
+   URLSLike		varchar(250) null,
+   statusucesca		varchar(30) not null
+);
+
+
+
+INSERT INTO `PrivredaZanatsvo`.`KORISNIK` (PREZIME, IME, EMAIL, KORISNICKOIME, SIFRA, URLSLIKE, STATUSUCESCA) VALUES ('Бановић', 'Петар', 'banovicp@gmail.com', 'banovicp', 'bp', 'admin.jpg', 'admin');
+
+
+INSERT INTO `PrivredaZanatsvo`.`Proizvodjac` (Id, Prezime, Ime, MestoPrebivalista, UkupanBrojEvidencija) VALUES ('0', 'Петровић','Петар','Зрењанин', 0);
+INSERT INTO `PrivredaZanatsvo`.`Proizvodjac` (Id, Prezime, Ime, MestoPrebivalista, UkupanBrojEvidencija) VALUES ('1', 'Марковић','Марко','Нови Сад', 0);
+INSERT INTO `PrivredaZanatsvo`.`Proizvodjac` (Id, Prezime, Ime, MestoPrebivalista, UkupanBrojEvidencija) VALUES ('2', 'Илић','Илија','Београд', 0);
+
